@@ -3,7 +3,7 @@ import MicrosoftGraph from '@microsoft/microsoft-graph-types'
 
 import { MicrosoftConnector } from './base'
 
-export default class ExcelConnector extends MicrosoftConnector {
+export class ExcelConnector extends MicrosoftConnector {
   async getDriveItem(driveItem: string): Promise<MicrosoftGraph.DriveItem> {
     const request = await this.client.api(driveItem).get()
     return request
@@ -90,15 +90,12 @@ export default class ExcelConnector extends MicrosoftConnector {
   async insertRange(
     driveItem: string,
     name: string,
-    values?: Record<string, unknown>,
-    formula?: Record<string, unknown>,
-    numberFormat?: Record<string, unknown>,
+    address: string,
+    shift: 'Down' | 'Right',
   ): Promise<MicrosoftGraph.WorkbookRange> {
     const request = await this.client
-      .api(`${driveItem}/workbook/worksheets/${name}/range/insert`)
-      .update({ values, formula, numberFormat })
+      .api(`${driveItem}/workbook/worksheets/${name}/range(address='${address}')/insert`)
+      .post({ shift })
     return request
   }
 }
-
-export { ExcelConnector }

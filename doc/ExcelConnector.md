@@ -27,9 +27,9 @@ excelConnector
 
 #### Table of Contents
 
-[Configuration](#ConfigurationOptions) Configuration options
+[Configuration options](#Configuration-Options)
 
-[Types](#TypeScriptTypes) TypeScript types
+[TypeScript Types](#TypeScript-Types)
 
 _Connector actions_:
 
@@ -88,14 +88,6 @@ List Worksheets.
 
 ```ts
 async listWorksheets(driveItem: string): Promise<MicrosoftGraph.WorkbookWorksheet[]>
-```
-
-##### getTables
-
-Get Tables.
-
-```ts
-async getTables(driveItem: string, name: string): Promise<MicrosoftGraph.WorkbookTable[]>
 ```
 
 ##### getTables
@@ -192,22 +184,7 @@ Insert a Range.
 async insertRange(
     driveItem: string,
     name: string,
-    values?: Record<string, unknown>,
-    formula?: Record<string, unknown>,
-    numberFormat?: Record<string, unknown>,
-  ): Promise<MicrosoftGraph.WorkbookRange>
-```
-
-##### insertRange
-
-Insert a Range.
-
-```ts
-async insertRange(
-    driveItem: string,
-    name: string,
-    values?: Record<string, unknown>,
-    formula?: Record<string, unknown>,
-    numberFormat?: Record<string, unknown>,
+    address: string,
+    shift: 'Down' | 'Right',
   ): Promise<MicrosoftGraph.WorkbookRange>
 ```
