@@ -1,4 +1,2 @@
-import { ExcelConnector } from './excel'
-import { MicrosoftConnector } from './base'
-
-export { MicrosoftConnector, ExcelConnector }
+export * from './excel'
+export * from './base'
