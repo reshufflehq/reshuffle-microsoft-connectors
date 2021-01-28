@@ -1,6 +1,6 @@
 # reshuffle-microsoft-connectors
 
-This package contains [Reshuffle](https://github.com/reshufflehq/reshuffle) connectors to (some of the) services available from Microsoft. These connectors are all implemented using the [Microsoft Graph SDK for JS](https://github.com/microsoftgraph/msgraph-sdk-javascript).
+This package contains [Reshuffle](https://github.com/reshufflehq/reshuffle) connectors to some of the services available from Microsoft. These connectors are all implemented using the [Microsoft Graph SDK for JS](https://github.com/microsoftgraph/msgraph-sdk-javascript).
 
 ## Connectors
 
