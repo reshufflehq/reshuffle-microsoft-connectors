@@ -1,7 +1,7 @@
 {
   "name": "reshuffle-microsoft-connectors",
   "version": "0.0.1",
-  "description": "A Reshuffle Microsoft connector",
+  "description": "A set of Reshuffle connectors for Microsoft services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -23,9 +23,9 @@
   "author": "Reshuffle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/reshufflehq/reshuffle-microsoft-connector/issues"
+    "url": "https://github.com/reshufflehq/reshuffle-microsoft-connectors/issues"
   },
-  "homepage": "https://github.com/reshufflehq/reshuffle-microsoft-connector#readme",
+  "homepage": "https://github.com/reshufflehq/reshuffle-microsoft-connectors#readme",
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^2.2.1",
     "node-fetch": "^2.6.1",
