@@ -5,7 +5,10 @@ import type { Request, Response } from 'express'
 
 import { ClientCredentialAuthenticationProvider, MicrosoftOptions } from './auth'
 
-export type MicrosoftConnectorConfigOptions = MicrosoftOptions & { debugLogging?: boolean }
+export type MicrosoftConnectorConfigOptions = Omit<MicrosoftOptions, 'notificationUrl'> & {
+  debugLogging?: boolean
+  runtimeBaseUrl?: string
+}
 
 export type MicrosoftEventConfigOptions = MicrosoftGraph.Subscription
 
@@ -35,10 +38,16 @@ export class MicrosoftConnector extends BaseHttpConnector<
     ).value
 
     for (const event of Object.values(this.eventConfigurations)) {
-      const options: MicrosoftEventConfigOptions = event.options
+      const { runtimeBaseUrl, ...options } = event.options as MicrosoftConnectorConfigOptions
+      const eventSubscription = {
+        ...options,
+        notificationUrl: runtimeBaseUrl + DEFAULT_WEBHOOK_PATH,
+      } as MicrosoftGraph.Subscription
       const existingSubscription = subscriptions.find((subscription) =>
         Object.keys(event.options).every(
-          (key) => event.options[key] === subscription[key as keyof MicrosoftGraph.Subscription],
+          (key) =>
+            eventSubscription[key as keyof MicrosoftGraph.Subscription] ===
+            subscription[key as keyof MicrosoftGraph.Subscription],
         ),
       )
       let subscription: MicrosoftGraph.Subscription
@@ -48,7 +57,7 @@ export class MicrosoftConnector extends BaseHttpConnector<
         )
         subscription = existingSubscription
       } else {
-        subscription = await this.sdk().api('/subscriptions').post(options)
+        subscription = await this.sdk().api('/subscriptions').post(eventSubscription)
         logger.info(
           `Reshuffle Microsoft - webhook registered successfully (resource: ${subscription.resource}, url: ${subscription.notificationUrl})`,
         )
@@ -86,14 +95,12 @@ export class MicrosoftConnector extends BaseHttpConnector<
     if (validationToken) {
       res.send(validationToken)
     } else {
-      const data = req.body.value
-
+      const { value: data = [] } = req.body as MicrosoftGraph.ChangeNotificationCollection
       for (const incomingEvent of data) {
         const eventsUsingGithubEvent = Object.values(this.eventConfigurations).filter(
           (event: EventConfiguration) =>
-            event.options.subscriptionId === incomingEvent.subsciptionId,
+            event.options.subscriptionId === incomingEvent.subscriptionId,
         )
-
         for (const event of eventsUsingGithubEvent) {
           await this.app.handleEvent(event.id, {
             ...event,

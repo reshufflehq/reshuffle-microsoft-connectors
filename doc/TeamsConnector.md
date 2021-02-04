@@ -24,7 +24,7 @@ connector.on(
   {
     resource: '/teams/getAllMessages',
     changeType: 'created',
-    notificationUrl: 'https://example.com/webhook',
+    runtimeBaseUrl: 'https://example.com',
     expirationDateTime: '2021-02-03T03:47:17.292Z',
   },
   (event) => console.log(event),
