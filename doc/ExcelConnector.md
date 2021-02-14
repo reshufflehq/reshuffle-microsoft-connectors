@@ -6,10 +6,9 @@
 
 `npm install reshuffle-excel-connector`
 
-### Reshuffle Microsoft Connectors
+### Reshuffle Microsoft Excel Connector
 
-This package contains a collection of [Reshuffle](https://github.com/reshufflehq/reshuffle)
-connectors to [Microsoft](https://microsoft.com).
+This [Reshuffle](https://github.com/reshufflehq/reshuffle) connector can be used to access Microsoft Excel on Office365.
 
 The following example adds a new worksheet to an excel file
 
