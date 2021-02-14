@@ -1,15 +1,10 @@
-# reshuffle-microsoft-connectors
-
-[Code](https://github.com/reshufflehq/reshuffle-microsoft-connectors) |
-[npm](https://www.npmjs.com/package/reshuffle-microsoft-connectors) |
-[Code sample](https://github.com/reshufflehq/reshuffle/tree/master/examples/microsoft/teams)
+# reshuffle-teams-connector
 
 `npm install reshuffle-microsoft-connectors`
 
-### Reshuffle Microsoft Connectors
+_ES6 import_: `import { TeamsConnector } from 'reshuffle-microsoft-connectors'`
 
-This package contains a collection of [Reshuffle](https://github.com/reshufflehq/reshuffle)
-connectors to [Microsoft](https://microsoft.com).
+This is a [Reshuffle](https://reshuffle.com) connector that provides an Interface to Microsoft Teams.
 
 The following example adds a new worksheet to an excel file
 
@@ -18,7 +13,7 @@ const { Reshuffle } = require('reshuffle')
 const { TeamsConnector } = require('reshuffle-microsoft-connectors')
 
 const app = new Reshuffle()
-const connector = new TeamsConnector(app, { AppId, AppPassword, AppTenantId })
+const connector = new TeamsConnector(app, { process.env.AppId, process.env.AppPassword, process.env.AppTenantId })
 
 connector.on(
   {
