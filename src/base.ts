@@ -8,11 +8,12 @@ import { ClientCredentialAuthenticationProvider, MicrosoftOptions } from './auth
 export type MicrosoftConnectorConfigOptions = Omit<MicrosoftOptions, 'notificationUrl'> & {
   debugLogging?: boolean
   runtimeBaseUrl?: string
+  webhookPath?: string
 }
 
 export type MicrosoftEventConfigOptions = MicrosoftGraph.Subscription
 
-const DEFAULT_WEBHOOK_PATH = '/reshuffle-microsoft-connector/webhook'
+const DEFAULT_WEBHOOK_PATH = '/webhooks/microsoft'
 
 export class MicrosoftConnector extends BaseHttpConnector<
   MicrosoftConnectorConfigOptions,
@@ -41,7 +42,7 @@ export class MicrosoftConnector extends BaseHttpConnector<
       const { runtimeBaseUrl, ...options } = event.options as MicrosoftConnectorConfigOptions
       const eventSubscription = {
         ...options,
-        notificationUrl: runtimeBaseUrl + DEFAULT_WEBHOOK_PATH,
+        notificationUrl: runtimeBaseUrl + (DEFAULT_WEBHOOK_PATH || options.webhookPath),
       } as MicrosoftGraph.Subscription
       const existingSubscription = subscriptions.find((subscription) =>
         Object.keys(event.options).every(
@@ -97,11 +98,11 @@ export class MicrosoftConnector extends BaseHttpConnector<
     } else {
       const { value: data = [] } = req.body as MicrosoftGraph.ChangeNotificationCollection
       for (const incomingEvent of data) {
-        const eventsUsingGithubEvent = Object.values(this.eventConfigurations).filter(
+        const eventsUsingMicrosoftEvent = Object.values(this.eventConfigurations).filter(
           (event: EventConfiguration) =>
             event.options.subscriptionId === incomingEvent.subscriptionId,
         )
-        for (const event of eventsUsingGithubEvent) {
+        for (const event of eventsUsingMicrosoftEvent) {
           await this.app.handleEvent(event.id, {
             ...event,
             ...req.body,
