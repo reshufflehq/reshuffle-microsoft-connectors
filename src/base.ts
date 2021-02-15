@@ -96,6 +96,7 @@ export class MicrosoftConnector extends BaseHttpConnector<
     if (validationToken) {
       res.send(validationToken)
     } else {
+      res.status(202).send()
       const { value: data = [] } = req.body as MicrosoftGraph.ChangeNotificationCollection
       for (const incomingEvent of data) {
         const eventsUsingMicrosoftEvent = Object.values(this.eventConfigurations).filter(
@@ -109,8 +110,6 @@ export class MicrosoftConnector extends BaseHttpConnector<
           })
         }
       }
-
-      res.status(202).send()
     }
     return true
   }
