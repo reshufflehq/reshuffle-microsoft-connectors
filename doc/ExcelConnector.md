@@ -1,15 +1,10 @@
 # reshuffle-excel-connector
 
-[Code](https://github.com/reshufflehq/reshuffle-microsoft-connectors) |
-[npm](https://www.npmjs.com/package/reshuffle-microsoft-connectors) |
-[Code sample](https://github.com/reshufflehq/reshuffle/tree/master/examples/microsoft/excel)
+`npm install reshuffle-microsoft-connectors`
 
-`npm install reshuffle-excel-connector`
+_ES6 import_: `import { ExcelConnector } from 'reshuffle-microsoft-connectors'`
 
-### Reshuffle Microsoft Connectors
-
-This package contains a collection of [Reshuffle](https://github.com/reshufflehq/reshuffle)
-connectors to [Microsoft](https://microsoft.com).
+This is a [Reshuffle](https://reshuffle.com) connector that provides an Interface to Microsoft Excel.
 
 The following example adds a new worksheet to an excel file
 
@@ -18,7 +13,7 @@ const { Reshuffle } = require('reshuffle')
 const { MicrosoftConnector } = require('reshuffle-microsoft-connectors')
 
 const app = new Reshuffle()
-const connector = new ExcelConnector(app, { AppId, AppPassword, AppTenantId })
+const connector = new ExcelConnector(app, { process.env.AppId, process.env.AppPassword, process.env.AppTenantId })
 
 excelConnector
   .addNewWorksheet('drive/items/{item-id}', 'myNewSheet')
@@ -62,7 +57,7 @@ const app = new Reshuffle()
 const connector = new ExcelConnector(app, { AppId, AppPassword, AppTenantId })
 ```
 
-Credentials can be created by following the guide at https://docs.microsoft.com/en-us/graph/auth-v2-service
+Credentials can be created by following this [guide](https://docs.microsoft.com/en-us/graph/auth-v2-service)
 
 See the `Credentials` interface exported from the connector for details.
 
