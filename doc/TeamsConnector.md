@@ -13,7 +13,13 @@ const { Reshuffle } = require('reshuffle')
 const { TeamsConnector } = require('reshuffle-microsoft-connectors')
 
 const app = new Reshuffle()
-const connector = new TeamsConnector(app, { process.env.AppId, process.env.AppPassword, process.env.AppTenantId })
+const connector = new TeamsConnector(app, 
+  { 
+    AppId: process.env.AppId, 
+    AppPassword: process.env.AppPassword, 
+    AppTenantId: process.env.AppTenantId 
+  }
+)
 
 connector.on(
   {
