@@ -5,10 +5,12 @@ This package contains [Reshuffle](https://github.com/reshufflehq/reshuffle) conn
 ## Connectors
 
 - [Excel](doc/ExcelConnector.md)
+- [Teams](doc/TeamsConnector.md)
 
 ## Examples
 
-- [Excel](examples/excel.js)
+- [Excel](https://github.com/reshufflehq/reshuffle/tree/master/examples/microsoft/excel)
+- [Teams](https://github.com/reshufflehq/reshuffle/tree/master/examples/microsoft/teams)
 
 ## Learn more
 
