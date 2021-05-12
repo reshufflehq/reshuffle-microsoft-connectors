@@ -1,6 +1,6 @@
 {
   "name": "reshuffle-microsoft-connectors",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A set of Reshuffle connectors for Microsoft services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
